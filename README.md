@@ -71,6 +71,48 @@ print C # will print 'c'
 And also, it can accept any callable which takes these two parameters (so if
 you prefer, you can give the function reference to it).
 
+Permitted values
+----------------
+
+There are cases when you want to check whether the value the function
+received is one of the constants defined previously in the code. Such code
+usually look like:
+
+```python
+from const import const
+
+class A:
+    CONST_A, CONST_B, CONST_C = const("SAME")
+    PERMITTED_CONSTANTS = {CONST_A, CONST_B, CONST_C}
+
+    def foobar(self, param1)
+        if param1 not in self.PERMITTED_CONSTANTS:
+            raise ValueError("Invalid parameter specified: %r" % param1)
+
+```
+
+
+In case you need the complete list to fill the permitted values variable,
+you can speciy the _prefix_ parameter as _PERMITTED_, so it will specify all
+the permitted values to the first valiable.
+
+With this, the above code would look like:
+
+```python
+from const import const, PERMITTED
+class A:
+    PERMITTED_CONSTANTS, CONST_A, CONST_B, CONST_C = const("SAME", PERMITTED)
+
+    def foobar(self, param1)
+        if param1 not in self.PERMITTED_CONSTANTS:
+            raise ValueError("Invalid parameter specified: %r" % param1)
+
+```
+
+Here, the `PERMITTED_CONSTANTS` will be a set of the three constants, so the
+lookup with the `in` operator will be faster (compared to `list` or `tuple`).
+
+
 
 Restrictions
 ------------

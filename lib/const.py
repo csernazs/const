@@ -13,6 +13,8 @@ STORE_COMMANDS = {STORE_FAST, STORE_GLOBAL, STORE_NAME, STORE_DEREF}
 
 NAMING = {}
 
+PERMITTED = "permitted"
+
 class UnknownCommand(Exception):
     pass
 
@@ -73,13 +75,18 @@ def number1(idx, value):
 def same(idx, value):
     return value
 
-def const(naming):
+def const(naming, prefix=None):
     if not callable(naming):
         naming = NAMING[naming]
 
     names, unpack = assigned_names()
     if unpack:
-        return [naming(idx, value) for idx, value in enumerate(names)]
+        values = [naming(idx, value) for idx, value in enumerate(names)]
+        if prefix == PERMITTED:
+            return [set(values[1:])] + values[1:]
+        else:
+            return values
+            
     else:
         return naming(0, names[0])
 
@@ -96,5 +103,7 @@ if __name__ == '__main__':
     print Example.CONST_B
     print Example.CONST_C
     print Example.CONST_D
+    print Example.CONST_E
+    print Example.CONST_F
 
 

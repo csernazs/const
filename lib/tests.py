@@ -1,7 +1,7 @@
 from pprint import pprint
 import unittest
 import code
-from const import const
+from const import const, PERMITTED
 
 
 class TestCode(unittest.TestCase):
@@ -62,6 +62,15 @@ class TestConst(unittest.TestCase):
         self.assertEqual(2, Example.N2)
         self.assertEqual("single", Example.SINGLE)
 
+    def test_prefix(self):
+        class Example(object):
+            PERMITTED_VALUES, CONST_A, CONST_B, CONST_C = const("SAME", PERMITTED)
+
+        self.assertEqual("CONST_A", Example.CONST_A)
+        self.assertEqual("CONST_B", Example.CONST_B)
+        self.assertEqual("CONST_C", Example.CONST_C)
+        
+        self.assertEqual({"CONST_A", "CONST_B", "CONST_C"}, Example.PERMITTED_VALUES)
 
 if __name__ == "__main__":
     unittest.main()
