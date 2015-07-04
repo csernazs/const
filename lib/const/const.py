@@ -3,8 +3,7 @@ __all__ = ["const", "register_naming", "naming", "PERMITTED"]
 
 import sys
 import dis
-import functools
-from bytecode import ByteCode, command_to_string
+from .bytecode import ByteCode, command_to_string
 
 UNPACK_SEQUENCE = dis.opmap["UNPACK_SEQUENCE"]
 STORE_FAST = dis.opmap["STORE_FAST"]

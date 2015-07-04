@@ -1,5 +1,4 @@
 import dis
-import sys
 
 
 class EndOfCode(Exception):
