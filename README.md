@@ -108,8 +108,9 @@ Restrictions
 
 This code relies heavily on stack frames. The code it uses examines the
 parent frame.  This might not work for each and every python interpreter.
+This library is python2 only, and works with pypy as well.
 
-Llocal variables do not have their names so it's not possible to use
+Local variables do not have their names so it's not possible to use
 `const()` with local variables.
 
 
