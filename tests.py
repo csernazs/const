@@ -1,6 +1,10 @@
+
+import sys
+sys.path.append("lib")
+
 from pprint import pprint
 import unittest
-import bytecode
+from const import bytecode
 from const import const, PERMITTED
 
 

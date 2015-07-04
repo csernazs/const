@@ -1,3 +1,6 @@
+
+__all__ = ["const", "register_naming", "naming", "PERMITTED"]
+
 import sys
 import dis
 import functools
