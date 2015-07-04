@@ -1,4 +1,3 @@
-
 import dis
 import sys
 
@@ -6,11 +5,11 @@ import sys
 class EndOfCode(Exception):
     pass
 
+
 class Code(object):
     def __init__(self, code, ip=0):
         self.code = code
         self.ip = ip
-        
 
     def get_code(self):
         try:
@@ -27,7 +26,7 @@ class Code(object):
         return retval
 
     def read_argument(self):
-        return self.read_code() + self.read_code()*256
+        return self.read_code() + self.read_code() * 256
 
     def __iter__(self):
         return self
@@ -50,9 +49,10 @@ class Code(object):
         if command == dis.EXTENDED_ARG:
             offset = arg * 65536L
             command, arg = self.read_command_arg()
-            return (command, offset+arg)
+            return (command, offset + arg)
         else:
             return (command, arg)
+
 
 def command_to_string(command, arg):
     if arg is not None:

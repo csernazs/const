@@ -15,8 +15,10 @@ NAMING = {}
 
 PERMITTED = "permitted"
 
+
 class UnknownCommand(Exception):
     pass
+
 
 def assigned_names():
     frame = sys._getframe(2)
@@ -52,6 +54,7 @@ def assigned_names():
 def register_naming(naming, callback):
     NAMING[naming] = callback
 
+
 def naming(naming_id):
     def decorator(func):
         register_naming(naming_id, func)
@@ -59,21 +62,26 @@ def naming(naming_id):
 
     return decorator
 
+
 @naming("DASH")
 def dash(idx, value):
     return value.lower().replace("_", "-")
+
 
 @naming("NUMBER0")
 def number0(idx, value):
     return idx
 
+
 @naming("NUMBER1")
 def number1(idx, value):
-    return idx+1
+    return idx + 1
+
 
 @naming("SAME")
 def same(idx, value):
     return value
+
 
 def const(naming, prefix=None):
     if not callable(naming):
@@ -86,18 +94,17 @@ def const(naming, prefix=None):
             return [set(values[1:])] + values[1:]
         else:
             return values
-            
+
     else:
         return naming(0, names[0])
 
 
-
 if __name__ == '__main__':
+
     class Example(object):
         CONST_A, CONST_B, CONST_C = const("NUMBER1")
         CONST_D = const("DASH")
         CONST_E, CONST_F = const("SAME")
-
 
     print Example.CONST_A
     print Example.CONST_B
@@ -105,5 +112,3 @@ if __name__ == '__main__':
     print Example.CONST_D
     print Example.CONST_E
     print Example.CONST_F
-
-

@@ -5,9 +5,10 @@ from const import const, PERMITTED
 
 
 class TestCode(unittest.TestCase):
+
     def test_simple(self):
         def func():
-            a,b,c = range(3)
+            a, b, c = range(3)
 
         actual = [code.command_to_string(command, arg) for command, arg in code.Code(func.func_code.co_code)]
         expected = ['LOAD_GLOBAL 0',
@@ -40,8 +41,8 @@ class TestCode(unittest.TestCase):
         self.assertEqual(expected, actual[-10:])
 
 
-
 class TestConst(unittest.TestCase):
+
     def test_class(self):
         class Example(object):
             CONST_A, CONST_B, CONST_C_WITH_UNDERSCORES = const("DASH")
@@ -69,7 +70,7 @@ class TestConst(unittest.TestCase):
         self.assertEqual("CONST_A", Example.CONST_A)
         self.assertEqual("CONST_B", Example.CONST_B)
         self.assertEqual("CONST_C", Example.CONST_C)
-        
+
         self.assertEqual({"CONST_A", "CONST_B", "CONST_C"}, Example.PERMITTED_VALUES)
 
 if __name__ == "__main__":
