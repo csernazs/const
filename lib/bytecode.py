@@ -6,7 +6,7 @@ class EndOfCode(Exception):
     pass
 
 
-class Code(object):
+class ByteCode(object):
     def __init__(self, code, ip=0):
         self.code = code
         self.ip = ip

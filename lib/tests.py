@@ -1,16 +1,16 @@
 from pprint import pprint
 import unittest
-import code
+import bytecode
 from const import const, PERMITTED
 
 
-class TestCode(unittest.TestCase):
+class TestByteCode(unittest.TestCase):
 
     def test_simple(self):
         def func():
             a, b, c = range(3)
 
-        actual = [code.command_to_string(command, arg) for command, arg in code.Code(func.func_code.co_code)]
+        actual = [bytecode.command_to_string(command, arg) for command, arg in bytecode.ByteCode(func.func_code.co_code)]
         expected = ['LOAD_GLOBAL 0',
                     'LOAD_CONST 1',
                     'CALL_FUNCTION 1',
@@ -25,8 +25,8 @@ class TestCode(unittest.TestCase):
 
     def test_extended(self):
         code_str = ",".join(["v_%d" % idx for idx in xrange(70000)]) + "= range(70000)"
-        actual = list(code.Code(compile(code_str, "a.py", "exec").co_code))
-        actual = [code.command_to_string(command, arg) for command, arg in actual]
+        actual = list(bytecode.ByteCode(compile(code_str, "a.py", "exec").co_code))
+        actual = [bytecode.command_to_string(command, arg) for command, arg in actual]
         expected = ['STORE_NAME 69993',
                     'STORE_NAME 69994',
                     'STORE_NAME 69995',

@@ -1,7 +1,7 @@
 import sys
 import dis
 import functools
-from code import Code, command_to_string
+from bytecode import ByteCode, command_to_string
 
 UNPACK_SEQUENCE = dis.opmap["UNPACK_SEQUENCE"]
 STORE_FAST = dis.opmap["STORE_FAST"]
@@ -22,7 +22,7 @@ class UnknownCommand(Exception):
 
 def assigned_names():
     frame = sys._getframe(2)
-    code = Code(frame.f_code.co_code, frame.f_lasti)
+    code = ByteCode(frame.f_code.co_code, frame.f_lasti)
     # skip first command
     code.next()
 
