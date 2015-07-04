@@ -2,23 +2,12 @@
 const
 =====
 
-_Define constants and enums for Python, the easy way_
+_Define constants and enums for Python, the easy way._
 
 Examples
 --------
 
-
-While enums are available since python 3.4, they still need to be specified in this way:
-
-```python
-from enum import Enum
-class Color(Enum):
-    red = 1
-    green = 2
-    blue = 3
-```
-
-Having a value assigned to each constant seems boring for me, so here is my idea:
+Here's the idea:
 
 ```python
 from const import const
